@@ -19,7 +19,7 @@
 		<label>PostPath:</label>
 		<input type="text" name="postPath"><br>
 		<label>Popularidade:</label>
-		<input type="text" name="popularidade">
+		<input type="number" name="popularidade">
 		<input type="submit"> 
 	</Form>
 </body>

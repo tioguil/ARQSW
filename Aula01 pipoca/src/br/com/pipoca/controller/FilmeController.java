@@ -21,6 +21,7 @@ public class FilmeController {
 	
 	@RequestMapping(value="/inserir", method = RequestMethod.POST)
 	public ModelAndView inserirFilme(@ModelAttribute("filme") Filme filme) {
+		System.out.println("Entrou");
 		ModelAndView andView = new ModelAndView("inserido");
 		andView.addObject("filme",filme);
 ;		return andView;
