@@ -7,7 +7,7 @@
 <title>Resultado</title>
 </head>
 <body>
-	<h2>${filme.nome}</h2>
+	<h2>${filme.titulo}</h2>
 	<h2>${filme.dataLancamento }</h2>
 	<h2>${filme.diretor}</h2>
 	<h2>${filme.descricao}</h2>
