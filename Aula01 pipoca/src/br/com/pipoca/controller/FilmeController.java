@@ -21,13 +21,14 @@ import br.com.pipoca.service.GeneroService;
 @RequestMapping("filme")
 public class FilmeController {
 	
-	@Autowired
+
 	private FilmeService filmeService;
-	
+
 	private GeneroService generoService;
 	
 	public FilmeController() {
-//		filmeService = new FilmeService();
+		filmeService = new FilmeService();
+		generoService = new GeneroService();
 	}
 	
 	@RequestMapping("/novo")

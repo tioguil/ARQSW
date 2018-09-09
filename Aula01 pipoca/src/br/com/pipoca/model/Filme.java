@@ -2,14 +2,11 @@ package br.com.pipoca.model;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Filme {
 	private int id;
 	
-	@NotNull
 	private String titulo;
 	private String descricao;
 	
