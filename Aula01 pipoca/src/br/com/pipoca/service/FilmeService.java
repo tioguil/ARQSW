@@ -1,6 +1,7 @@
 package br.com.pipoca.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,23 @@ public class FilmeService {
 		int id = dao.inserirFilme(filme);
 		filme.setId(id);
 		return filme;
+	}
+	
+	public ArrayList<Filme> listarFilmes(String chave) throws IOException{
+		return dao.listarFilmes(chave);
+	}
+
+	public ArrayList<Filme> listarFilmes() throws IOException{
+		return dao.listarFilmes();
+	}
+
+	public void updateFilme(Filme filme) throws IOException {
+		dao.updateFilme(filme);
+	}
+
+	public void deleteFilme(Integer id) throws IOException {
+		dao.deletaFilme(id);
+		
 	}
 
 }

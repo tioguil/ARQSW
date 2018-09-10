@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 	static {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			// porque este erro nao pode ser prevenido via programa usa-se RuntimeException,
@@ -21,7 +21,7 @@ public class ConnectionFactory {
 	public static Connection getConnection() throws IOException {
 		try {
 			return DriverManager.getConnection("jdbc:mysql://localhost/pipocadb?"
-					+ "user=guil&password=root&useSSL=false");
+					+ "user=root&password=root&useSSL=false&useTimezone=true&serverTimezone=UTC");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);

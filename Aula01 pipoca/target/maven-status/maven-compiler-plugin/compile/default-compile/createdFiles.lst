@@ -1,1 +1,10 @@
-br/com/pipoca/controller/PipocaController.class
+br\com\pipoca\dao\GeneroDAO.class
+br\com\pipoca\dao\ConnectionFactory.class
+br\com\pipoca\model\Filme.class
+br\com\pipoca\service\FilmeService.class
+br\com\pipoca\service\Service.class
+br\com\pipoca\service\GeneroService.class
+br\com\pipoca\controller\FilmeController.class
+br\com\pipoca\controller\PipocaController.class
+br\com\pipoca\dao\FilmeDAO.class
+br\com\pipoca\model\Genero.class
