@@ -28,7 +28,7 @@
                                 Deseja realmente excluir este filme?
                             </div>
                             <div class="modal-footer">
-                                <form action="excluir_filme" method="post">
+                                <form action="/pipoca/delete" method="post">
                                     <input type="hidden" name="id" value="${filme.id}" />
                                     <button type="submit" class="btn btn-primary" name="acao" value="Excluir">Sim</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>

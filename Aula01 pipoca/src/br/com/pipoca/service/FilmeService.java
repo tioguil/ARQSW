@@ -2,6 +2,8 @@ package br.com.pipoca.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,27 @@ public class FilmeService {
 	public void deleteFilme(Integer id) throws IOException {
 		dao.deletaFilme(id);
 		
+	}
+	
+	public ArrayList<Filme> listarPopulares(Integer inicio,Integer fim) throws IOException{
+		return dao.listarPopulares(inicio, fim);
+	}
+	
+	public ArrayList<Filme> porData(String chave,Integer periodo) throws IOException{
+		Date data = new Date();
+		Calendar calendar = Calendar.getInstance();
+		if(chave.equals("ano")) {
+			calendar.add(Calendar.YEAR,(periodo)*-1);
+			calendar.set(Calendar.MONTH,0);
+			calendar.set(Calendar.DAY_OF_MONTH,1);
+		}
+		else {
+			calendar.add(Calendar.MONTH,-1*(periodo));
+			calendar.set(Calendar.DAY_OF_MONTH,1);
+		}
+		data = calendar.getTime();
+		System.out.println(data);
+		return dao.porData(data); 
 	}
 
 }

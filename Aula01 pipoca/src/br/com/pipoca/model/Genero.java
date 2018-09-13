@@ -1,8 +1,18 @@
 package br.com.pipoca.model;
 
+import java.util.List;
+
 public class Genero {
 	private int id;
 	private String nome;
+	private List<Filme> filmes;
+	
+	public List<Filme> getFilmes() {
+		return filmes;
+	}
+	public void setFilmes(List<Filme> filmes) {
+		this.filmes = filmes;
+	}
 	public int getId() {
 		return id;
 	}

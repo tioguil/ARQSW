@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,16 +29,14 @@ import br.com.pipoca.service.GeneroService;
 //@RequestMapping("filme")
 public class FilmeController {
 	
+	
 	private ModelAndView andView;
 	
+	@Autowired
 	private FilmeService filmeService;
-
+	@Autowired
 	private GeneroService generoService;
 	
-	public FilmeController() {
-		filmeService = new FilmeService();
-		generoService = new GeneroService();
-	}
 	
 	@RequestMapping("/novo")
 	public ModelAndView novoFilme() throws IOException {
@@ -88,8 +87,8 @@ public class FilmeController {
 		}
 	}
 
-	@RequestMapping("/criar_filme")
-	public String criarFilme(Filme filme, Model model) {
+	@PostMapping("/criar_filme")
+	public String criarFilme(@Valid Filme filme, Model model) {
 		try {
 			
 			Genero genero = new Genero();
@@ -99,9 +98,7 @@ public class FilmeController {
 
 			filme = filmeService.inserirFilme(filme);
 
-			model.addAttribute("filme", filme);
-
-			return "VisualizarFilme";
+			return "redirect: /pipoca/visualizar/" + filme.getId();
 		} catch (IOException e) {
 			e.printStackTrace();
 			model.addAttribute("erro", e);
@@ -117,13 +114,10 @@ public class FilmeController {
 	}
 	
 	@PostMapping("/update")
-	public ModelAndView updateFilme(Filme filme) throws IOException {
+	public String updateFilme(Filme filme) throws IOException {
 		andView = new ModelAndView("VisualizarFilme");
 		filmeService.updateFilme(filme);
-		System.out.println(filme.getGenero().getId());
-		filme = filmeService.buscarFilme(filme.getId());
-		andView.addObject("filme", filme);
-		return andView;
+		return "redirect: /pipoca/visualizar/"+filme.getId();
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -173,4 +167,42 @@ public class FilmeController {
 			return "Erro";
 		}
 	}
+	
+	@GetMapping("/catalogo/genero")
+	public ModelAndView porGeneros(Model model) throws IOException {
+		ModelAndView andView = new ModelAndView("CatalogoGenero");
+		ArrayList <Genero> porGeneros = generoService.listaGenFilmes();
+		andView.addObject("porGeneros",porGeneros);
+		return andView;
+	}
+	
+	@GetMapping("/catalogo/lancamento")
+	public ModelAndView porDtLancamento(Model model) throws IOException {
+		ModelAndView andView = new ModelAndView("CatalogoDataLancamento");
+		ArrayList<Filme> filmesAno = filmeService.porData("ano",1);
+		
+		ArrayList<Filme> filmesPenultimo = filmeService.porData("ano",2);
+		ArrayList<Filme> filmesMes = filmeService.porData("mes",1);
+		andView.addObject("filmesAno",filmesAno);
+		andView.addObject("filmesMes",filmesMes);
+		andView.addObject("filmesPenultimo",filmesPenultimo);
+		return andView;
+	}
+	
+	@GetMapping("/catalogo/popularidade")
+	public ModelAndView porPopularidade(Model model) throws IOException {
+		ModelAndView andView = new ModelAndView("CatalogoPopularidade");
+		ArrayList<Filme> filmes1 = filmeService.listarPopulares(0,30);
+		ArrayList<Filme> filmes2 = filmeService.listarPopulares(31,50);
+		ArrayList<Filme> filmes3 = filmeService.listarPopulares(51,60);
+		ArrayList<Filme> filmes4 = filmeService.listarPopulares(61,80);
+		ArrayList<Filme> filmes5 = filmeService.listarPopulares(81,100);
+		andView.addObject("filmes1",filmes1);
+		andView.addObject("filmes2",filmes2);
+		andView.addObject("filmes3",filmes3);
+		andView.addObject("filmes4",filmes4);
+		andView.addObject("filmes5",filmes5);
+		return andView;
+	}
+	
 }

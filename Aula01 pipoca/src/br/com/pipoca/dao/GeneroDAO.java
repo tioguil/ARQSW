@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
+import br.com.pipoca.model.Filme;
 import br.com.pipoca.model.Genero;
 
 
@@ -34,7 +36,7 @@ public class GeneroDAO {
 		}
 		return genero;
 	}
-
+	
 	public ArrayList<Genero> listarGeneros() throws IOException {
 		ArrayList<Genero> generos = new ArrayList<>();
 		String sql = "select id, nome from genero order by nome";
@@ -54,5 +56,31 @@ public class GeneroDAO {
 			throw new IOException(e);
 		}
 		return generos;
+	}
+
+	public ArrayList<Filme> listarFilmes(Genero genero) throws IOException{
+		ArrayList<Filme> filmes = new ArrayList<>();
+		String sql = "select * from filme where id_genero = ?";
+			
+			try (Connection conn = ConnectionFactory.getConnection();
+					PreparedStatement pst = conn.prepareStatement(sql);) {
+				pst.setInt(1,genero.getId());
+				ResultSet rs = pst.executeQuery();
+				while (rs.next()) {
+					Filme filme = new Filme();
+					filme.setId(rs.getInt("id"));
+					filme.setTitulo(rs.getString("titulo"));
+					filme.setDescricao(rs.getString("descricao"));
+					filme.setDiretor(rs.getString("diretor"));
+					filme.setPosterPath(rs.getString("posterpath"));
+					filme.setDataLancamento(rs.getDate("data_lancamento"));
+					filme.setPopularidade(rs.getInt("popularidade"));
+					filmes.add(filme);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new IOException(e);
+			}
+			return filmes;
 	}
 }

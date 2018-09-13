@@ -17,9 +17,9 @@
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catálogo</a>
                     		<ul class="dropdown-menu">
-  						  <li><a class="dropdown-item" href="#">por Gênero</a></li>
-  						   <li><a class="dropdown-item" href="#">por Popularidade</a></li>
-  						   <li><a class="dropdown-item" href="#">Lançamentos</a></li>
+  						  <li><a class="dropdown-item" href="/pipoca/catalogo/genero">por Gênero</a></li>
+  						   <li><a class="dropdown-item" href="/pipoca/catalogo/popularidade">por Popularidade</a></li>
+  						   <li><a class="dropdown-item" href="/pipoca/catalogo/lancamento">Lançamentos</a></li>
 						</ul>
                     </li>
                 </ul>

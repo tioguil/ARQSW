@@ -21,7 +21,7 @@ public class ConnectionFactory {
 	public static Connection getConnection() throws IOException {
 		try {
 			return DriverManager.getConnection("jdbc:mysql://localhost/pipocadb?"
-					+ "user=root&password=root&useSSL=false&useTimezone=true&serverTimezone=UTC");
+					+ "user=guil&password=root&useSSL=false&useTimezone=true&serverTimezone=UTC");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);
