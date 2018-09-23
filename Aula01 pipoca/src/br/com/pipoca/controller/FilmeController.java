@@ -32,17 +32,11 @@ public class FilmeController {
 	
 	
 	private ModelAndView andView;
-	
+	@Autowired
 	private FilmeService filmeService;
-	
+	@Autowired
 	private GeneroService generoService;
-	
-	
-	public FilmeController() {
-		this.filmeService = new FilmeService();
-		this.generoService = new GeneroService();
-	}
-	
+		
 	@RequestMapping("/novo")
 	public ModelAndView novoFilme() throws IOException {
 		ModelAndView andView = new ModelAndView("novo");
@@ -166,7 +160,7 @@ public class FilmeController {
 	}
 
 	@RequestMapping("/listar_filmes")
-	public String listarFilmes(HttpSession session, Model model, String chave) {
+	public String listarFilmes(HttpSession session, Model model,String chave) {
 		try {
 			//HttpSession session = ((HttpServletRequest) model).getSession();
 

@@ -58,6 +58,14 @@
 			<artifactId>spring-web</artifactId>
 			<version>5.0.8.RELEASE</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.0.8.RELEASE</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -94,9 +102,16 @@
 		</dependency>
 
 
-		<!-- HIBERNATE <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-core</artifactId> 
-			<version>5.2.6.Final</version> </dependency> <dependency> <groupId>org.hibernate</groupId> 
-			<artifactId>hibernate-entitymanager</artifactId> <version>5.2.6.Final</version> 
-			</dependency> -->
+		<!-- HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.2.6.Final</version>
+		</dependency>
 	</dependencies>
 </project>
