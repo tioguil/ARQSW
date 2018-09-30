@@ -3,12 +3,22 @@ package br.com.pipoca.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Entity
 public class Filme implements Serializable {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@Size(max=128, message="{max 128}") 
@@ -23,6 +33,8 @@ public class Filme implements Serializable {
 	private String posterPath;
 	private String diretor;
 	@NotNull
+	@ManyToOne
+	@JoinColumn(name="id_genero")
 	private Genero genero;
 	
 	public int getId() {

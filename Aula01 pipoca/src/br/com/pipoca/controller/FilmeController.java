@@ -2,7 +2,8 @@ package br.com.pipoca.controller;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -40,7 +41,7 @@ public class FilmeController {
 	@RequestMapping("/novo")
 	public ModelAndView novoFilme() throws IOException {
 		ModelAndView andView = new ModelAndView("novo");
-		ArrayList<Genero> list = generoService.listarGeneros();
+		List<Genero> list = generoService.listarGeneros();
 		andView.addObject(list);
 		return andView;
 	}
@@ -81,7 +82,7 @@ public class FilmeController {
 	public String novo(Model model) {
 		try {
 			generoService = new GeneroService();
-			ArrayList<Genero> generos = generoService.listarGeneros();
+			List<Genero> generos = generoService.listarGeneros();
 			model.addAttribute("generos", generos);
 			return "CriarFilme";
 		} catch (IOException e) {
@@ -97,7 +98,7 @@ public class FilmeController {
 			
 			if(result.hasErrors()) {
 				generoService = new GeneroService();
-				ArrayList<Genero> generos = generoService.listarGeneros();
+				List<Genero> generos = generoService.listarGeneros();
 				model.addAttribute("generos", generos);
 				return "CriarFilme";
 			}
@@ -135,7 +136,7 @@ public class FilmeController {
 	public ModelAndView editarFilme(@PathVariable Integer id) throws IOException {
 		andView = new ModelAndView("EditarFilme");
 		Filme filme = filmeService.buscarFilme(id);
-		ArrayList<Genero> generos = generoService.listarGeneros();
+		List<Genero> generos = generoService.listarGeneros();
 		andView.addObject("filme", filme);
 		andView.addObject("generos", generos);
 		return andView;
@@ -152,7 +153,7 @@ public class FilmeController {
 	@RequestMapping("/filmes")
 	public ModelAndView reiniciarLista(HttpSession session) throws IOException {
 		session.setAttribute("lista", null);
-		ArrayList<Filme> lista;
+		List<Filme> lista;
 		lista = filmeService.listarFilmes();
 		andView = new ModelAndView("ListarFilmes");
 		andView.addObject("lista",lista);
@@ -164,7 +165,7 @@ public class FilmeController {
 		try {
 			//HttpSession session = ((HttpServletRequest) model).getSession();
 
-			ArrayList<Filme> lista;
+			List<Filme> lista;
 			if (chave != null && chave.length() > 0) {
 				lista = filmeService.listarFilmes(chave);
 			} else {
@@ -182,7 +183,7 @@ public class FilmeController {
 	@GetMapping("/catalogo/genero")
 	public ModelAndView porGeneros(Model model) throws IOException {
 		ModelAndView andView = new ModelAndView("CatalogoGenero");
-		ArrayList <Genero> porGeneros = generoService.listaGenFilmes();
+		List <Genero> porGeneros = generoService.listaGenFilmes();
 		andView.addObject("porGeneros",porGeneros);
 		return andView;
 	}
@@ -190,10 +191,10 @@ public class FilmeController {
 	@GetMapping("/catalogo/lancamento")
 	public ModelAndView porDtLancamento(Model model) throws IOException {
 		ModelAndView andView = new ModelAndView("CatalogoDataLancamento");
-		ArrayList<Filme> filmesAno = filmeService.porData("ano",1);
+		List<Filme> filmesAno = filmeService.porData("ano",1);
 		
-		ArrayList<Filme> filmesPenultimo = filmeService.porData("ano",2);
-		ArrayList<Filme> filmesMes = filmeService.porData("mes",1);
+		List<Filme> filmesPenultimo = filmeService.porData("ano",2);
+		List<Filme> filmesMes = filmeService.porData("mes",1);
 		andView.addObject("filmesAno",filmesAno);
 		andView.addObject("filmesMes",filmesMes);
 		andView.addObject("filmesPenultimo",filmesPenultimo);
@@ -203,11 +204,11 @@ public class FilmeController {
 	@GetMapping("/catalogo/popularidade")
 	public ModelAndView porPopularidade(Model model) throws IOException {
 		ModelAndView andView = new ModelAndView("CatalogoPopularidade");
-		ArrayList<Filme> filmes1 = filmeService.listarPopulares(0,30);
-		ArrayList<Filme> filmes2 = filmeService.listarPopulares(31,50);
-		ArrayList<Filme> filmes3 = filmeService.listarPopulares(51,60);
-		ArrayList<Filme> filmes4 = filmeService.listarPopulares(61,80);
-		ArrayList<Filme> filmes5 = filmeService.listarPopulares(81,100);
+		List<Filme> filmes1 = filmeService.listarPopulares(0,30);
+		List<Filme> filmes2 = filmeService.listarPopulares(31,50);
+		List<Filme> filmes3 = filmeService.listarPopulares(51,60);
+		List<Filme> filmes4 = filmeService.listarPopulares(61,80);
+		List<Filme> filmes5 = filmeService.listarPopulares(81,100);
 		andView.addObject("filmes1",filmes1);
 		andView.addObject("filmes2",filmes2);
 		andView.addObject("filmes3",filmes3);

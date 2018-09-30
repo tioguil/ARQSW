@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,11 @@ public class FilmeService {
 		return filme;
 	}
 	
-	public ArrayList<Filme> listarFilmes(String chave) throws IOException{
+	public List<Filme> listarFilmes(String chave) throws IOException{
 		return dao.listarFilmes(chave);
 	}
 
-	public ArrayList<Filme> listarFilmes() throws IOException{
+	public List<Filme> listarFilmes() throws IOException{
 		return dao.listarFilmes();
 	}
 
@@ -44,11 +45,11 @@ public class FilmeService {
 		
 	}
 	
-	public ArrayList<Filme> listarPopulares(Integer inicio,Integer fim) throws IOException{
+	public List<Filme> listarPopulares(Integer inicio,Integer fim) throws IOException{
 		return dao.listarPopulares(inicio, fim);
 	}
 	
-	public ArrayList<Filme> porData(String chave,Integer periodo) throws IOException{
+	public List<Filme> porData(String chave,Integer periodo) throws IOException{
 		Date data = new Date();
 		Calendar calendar = Calendar.getInstance();
 		if(chave.equals("ano")) {

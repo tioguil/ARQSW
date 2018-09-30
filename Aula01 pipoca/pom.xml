@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.11</version>
+			<version>5.1.15</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
@@ -113,5 +113,12 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.2.6.Final</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.transaction/javax.transaction-api -->
+<dependency>
+    <groupId>javax.transaction</groupId>
+    <artifactId>javax.transaction-api</artifactId>
+    <version>1.2</version>
+</dependency>
+		
 	</dependencies>
 </project>

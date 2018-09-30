@@ -6,83 +6,39 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import br.com.pipoca.model.Filme;
 import br.com.pipoca.model.Genero;
 
-@Component
+
+@Repository
 public class GeneroDAO {
-
+	
+	@PersistenceContext
+	EntityManager manager;
+	
+	
 	public Genero buscarGenero(int id) throws IOException {
-		Genero genero = null;
-		String sql = "select id, nome from genero where id=?";
+		return manager.find(Genero.class, id);
+	}
 
-		try (Connection conn = ConnectionFactory.getConnection(); 
-				PreparedStatement pst = conn.prepareStatement(sql);) {
-
-			pst.setInt(1, id);
-			try (ResultSet rs = pst.executeQuery();) {
-
-				if (rs.next()) {
-					genero = new Genero();
-					genero.setId(id);
-					genero.setNome(rs.getString("nome"));
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new IOException(e);
-		}
-		return genero;
+	public List<Genero> listarGeneros() throws IOException {
+		return manager.createQuery("select g from Genero g").getResultList();
 	}
 	
-	public ArrayList<Genero> listarGeneros() throws IOException {
-		ArrayList<Genero> generos = new ArrayList<>();
-		String sql = "select id, nome from genero order by nome";
-
-		try (Connection conn = ConnectionFactory.getConnection();
-				PreparedStatement pst = conn.prepareStatement(sql);
-				ResultSet rs = pst.executeQuery();) {
-
-			while (rs.next()) {
-				Genero genero = new Genero();
-				genero.setId(rs.getInt("id"));
-				genero.setNome(rs.getString("nome"));
-				generos.add(genero);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new IOException(e);
-		}
-		return generos;
-	}
-
-	public ArrayList<Filme> listarFilmes(Genero genero) throws IOException{
-		ArrayList<Filme> filmes = new ArrayList<>();
-		String sql = "select * from filme where id_genero = ?";
-			
-			try (Connection conn = ConnectionFactory.getConnection();
-					PreparedStatement pst = conn.prepareStatement(sql);) {
-				pst.setInt(1,genero.getId());
-				ResultSet rs = pst.executeQuery();
-				while (rs.next()) {
-					Filme filme = new Filme();
-					filme.setId(rs.getInt("id"));
-					filme.setTitulo(rs.getString("titulo"));
-					filme.setDescricao(rs.getString("descricao"));
-					filme.setDiretor(rs.getString("diretor"));
-					filme.setPosterPath(rs.getString("posterpath"));
-					filme.setDataLancamento(rs.getDate("data_lancamento"));
-					filme.setPopularidade(rs.getInt("popularidade"));
-					filmes.add(filme);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new IOException(e);
-			}
-			return filmes;
+	public List<Filme> listarFilmes(Genero genero) throws IOException{
+		String jpql = "select f from Filme f where id_genero=:id";
+		Query query = manager.createQuery(jpql);
+		query.setParameter("id", genero.getId());
+		List<Filme> filmes = query.getResultList();
+		return filmes;
 	}
 }
