@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,37 +20,45 @@ public class FilmeService {
 	@Autowired
 	private FilmeDAO dao;
 
+	@Transactional
 	public Filme buscarFilme(int id) throws IOException{
 		return dao.buscarFilme(id);
 	}
 	
+	@Transactional
 	public Filme inserirFilme(Filme filme) throws IOException {
 		int id = dao.inserirFilme(filme);
 		filme.setId(id);
 		return filme;
 	}
 	
+	@Transactional
 	public List<Filme> listarFilmes(String chave) throws IOException{
 		return dao.listarFilmes(chave);
 	}
 
+	@Transactional
 	public List<Filme> listarFilmes() throws IOException{
 		return dao.listarFilmes();
 	}
 
+	@Transactional
 	public void updateFilme(Filme filme) throws IOException {
 		dao.updateFilme(filme);
 	}
 
+	@Transactional
 	public void deleteFilme(Integer id) throws IOException {
 		dao.deletaFilme(id);
 		
 	}
 	
+	@Transactional
 	public List<Filme> listarPopulares(Integer inicio,Integer fim) throws IOException{
 		return dao.listarPopulares(inicio, fim);
 	}
 	
+	@Transactional
 	public List<Filme> porData(String chave,Integer periodo) throws IOException{
 		Date data = new Date();
 		Calendar calendar = Calendar.getInstance();

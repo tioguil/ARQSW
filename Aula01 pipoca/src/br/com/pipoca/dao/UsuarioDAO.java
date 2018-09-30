@@ -20,16 +20,14 @@ public class UsuarioDAO {
 		String jpql = "select u from Usuario u where u.email = :email and u.senha=: senha";
 		System.out.println(usuario.getUserName());
 		try{
-			System.out.println("entrou no try");
 			Query query = manager.createQuery(jpql)
 					
 					.setParameter("email",usuario.getUserName())
 					.setParameter("senha",usuario.getPassword());
 			return (Usuario) query.getSingleResult();
 			
-			}catch (NoResultException nre){
-				System.out.println("caiu no catch");
-				System.out.println(nre);
+			}catch (NoResultException e){
+				e.printStackTrace();
 			return null;
 			}
 		

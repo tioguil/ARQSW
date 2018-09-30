@@ -2,6 +2,8 @@ package br.com.pipoca.service;
 
 import java.io.IOException;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioDAO dao;
 	
-	public UsuarioService() {
-		this.dao = new UsuarioDAO();
-	}
-	
+	@Transactional
 	public Usuario autenticar(Usuario usuario) throws IOException {
 		usuario =  dao.autenticar(usuario);
 		return usuario;
